@@ -22,3 +22,12 @@ const obj1 = {
 }
 
 console.log(obj1)
+
+
+// 3.扩展运算符的一些巧用
+const obj2 = {"name":"leon","age":18}
+const obj3 = {"course":"react","address":"中国明珠路"}
+// 如果我们想把obj2的内容和obj3的内容合并我们则可以
+console.log({...obj2,...obj3})
+// 如果还要额外添加一些属性的话
+console.log({...obj2,...obj3,"sex":"man"})
