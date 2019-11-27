@@ -1,5 +1,8 @@
 // 有状态组件
 import React, { Component } from 'react'
+// 引入ant-design-mobile
+import {Button} from'antd-mobile'
+// import 'antd-mobile/dist/antd-mobile.css'
 
 export default class customer extends Component {
     constructor(props){
@@ -61,6 +64,8 @@ export default class customer extends Component {
                 <button onClick={()=>this.addOneItem()}>箭头函数=>点击添加一条记录</button>
                 <br/>
                 <button onClick={this.addOneItem1}>bind=>点击添加一条记录</button>
+                {/* anit-button */}
+                <Button type="primary" style={{width:250}}>点击添加一条记录</Button>
             </div>
         )
     }
