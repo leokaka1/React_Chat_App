@@ -16,6 +16,16 @@ function List3(){
     return <div>这是list3</div>
 }
 
+class List4 extends React.Component{
+    render(){
+        console.log(this.props)
+        return(
+            // 传参
+            <div>{this.props.match.params.params}</div>
+        )
+    }
+}
+
 // 这里用provider包裹跟标签
 // 路由也必须包裹整个应用
 ReactDOM.render(
@@ -32,10 +42,14 @@ ReactDOM.render(
             <li>
                 <Link to="/list3">列表三</Link>
             </li>
+            <li>
+                <Link to="/list3">列表四，传参</Link>
+            </li>
         </ul>
         <Route exact path="/" component={App}></Route>
         <Route path="/list2" component={List2}></Route>
         <Route path="/list3" component={List3}></Route>
+        <Route path="/list3/:params" component={List4}></Route>
         </BrowserRouter>
     </Provider>
 , document.getElementById('root'));
