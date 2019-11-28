@@ -10,12 +10,18 @@ import Register from "./container/register/Register";
 import AuthRoute from './components/authRoute/AuthRoute'
 import "./config";
 
+function Boss(){
+  return <div>Boss</div>
+}
+
 function MyApp() {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <div>
           <AuthRoute></AuthRoute>
+          {/* Test */}
+          <Route path="/boss" component={Boss}></Route>
           {/* 引入登录页 */}
           <Route path="/login" component={Login}></Route>
           {/* 引入注册页 */}
