@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Logo from "../../components/Logo/Logo";
+import '../login/Login.css'
 // 引入布局组件
 import {
   List,
@@ -45,9 +46,9 @@ export default class Register extends Component {
     ];
 
     return (
-      <div>
+      <div className="loginContent">
         <Logo></Logo>
-        <h2>我是注册页面</h2>
+        <h2>注册用户</h2>
 
         <WingBlank>
           <InputItem onChange={v=>this.setState({userName:v})}>用户名:</InputItem>
