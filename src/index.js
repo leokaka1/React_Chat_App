@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import store from "./redux/store/store";
 import Login from "./container/login/Login";
 import Register from "./container/register/Register";
+import AuthRoute from './components/authRoute/AuthRoute'
 import "./config";
 
 function MyApp() {
@@ -14,6 +15,7 @@ function MyApp() {
     <Provider store={store}>
       <BrowserRouter>
         <div>
+          <AuthRoute></AuthRoute>
           {/* 引入登录页 */}
           <Route path="/login" component={Login}></Route>
           {/* 引入注册页 */}
