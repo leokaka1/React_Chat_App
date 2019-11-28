@@ -1,18 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux'
-import {BrowserRouter} from 'react-router-dom'
-import store from './store/store'
+import {BrowserRouter,Route,Redirect} from 'react-router-dom'
+import store from './redux/store/store'
+import Login from './container/login/Login'
+import Register from './container/register/Register'
 import './config'
 
 function MyApp(){
     return (
         <Provider store = {store}>
             <BrowserRouter>
-                <App />
+                <div>
+                    <Redirect to='/login'></Redirect>
+                    {/* 引入登录页 */}
+                    <Route path ='/login' component={Login}></Route>
+                    {/* 引入注册页 */}
+                    <Route path ='/register' component={Register}></Route>
+                </div>
             </BrowserRouter>
         </Provider>
     )
