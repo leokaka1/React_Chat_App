@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import axios from 'axios'
 import {withRouter} from 'react-router-dom'
 
@@ -28,7 +28,7 @@ import {withRouter} from 'react-router-dom'
     }   
 
     render(){
-        return <p>判断跳转的地方</p>
+        return null
     }
 }
 
