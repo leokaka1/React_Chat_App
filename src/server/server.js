@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+//跨域
+var cors = require('cors')
 
 // 连接数据库
 const db_url = "mongodb://leocaoxiaozhu.mynetgear.com:27017/chat_app";
@@ -20,6 +22,8 @@ const Users = mongoose.model(
 
 // 新建一个app
 const app = new express();
+// 使用跨域
+app.use(cors())
 
 // 返回一个H1标签
 app.get("/", (req, res) => {
