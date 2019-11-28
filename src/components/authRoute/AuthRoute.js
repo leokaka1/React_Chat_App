@@ -4,7 +4,7 @@ import axios from 'axios'
 export default class AuthRoute extends Component {
     componentDidMount(){
         axios.get('/user/info').then(res=>{
-            if(res.status==200){
+            if(res.status===200){
                 console.log(res.data)
             }
         })
