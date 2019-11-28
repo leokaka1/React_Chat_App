@@ -1,4 +1,5 @@
 import {LOGIN,LOGOUT} from '../const/authTitle'
+import {Route} from 'react-router-dom'
 
 const initialState = {
     isAuth:false,

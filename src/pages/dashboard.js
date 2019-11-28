@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Link,Route} from "react-router-dom";
-import { connect } from 'react-redux'
-import {Login,Logout} from '../actions/authAction'
-import App from '../App';
+import { Link, Route ,Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { Login, Logout } from "../actions/authAction";
+import App from "../App";
 
 function List2() {
   return <div>这是list2</div>;
@@ -22,16 +22,18 @@ class List4 extends React.Component {
   }
 }
 
- class Dashboard extends Component {
+class Dashboard extends Component {
   render() {
-      console.log(this.props)
-      const {auth,Login,Logout} = this.props
-    return (
+    console.log(this.props);
+    const { auth, Login, Logout } = this.props;
+
+    // 登录页面
+    const loginPage = <Redirect to= '/auth'></Redirect>
+    // 登录之后的页面
+    const appPage = (
       <div>
-        {auth.userName} 您好！！
-        登录状态:{auth.isAuth? " 已登录" : " 未登录"}
-        <br/>
-        <button onClick={Login}>登录</button>
+        {auth.userName} 您好！！ 登录状态:{auth.isAuth ? " 已登录" : " 未登录"}
+        <br />
         <button onClick={Logout}>登出</button>
         <ul>
           <li>
@@ -53,17 +55,18 @@ class List4 extends React.Component {
         <Route path="/dashboard/:params" component={List4}></Route>
       </div>
     );
+    return auth ? appPage : loginPage;
   }
 }
 
-const mapStateToProps = (state) => ({
-    auth:state.auth,
-})
+const mapStateToProps = state => ({
+  auth: state.auth
+});
 
 const mapDispatchToProps = {
-    Login,
-    Logout
-}
+  Login,
+  Logout
+};
 
 // export default Dashboard
-export default connect(mapStateToProps,mapDispatchToProps)(Dashboard)
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
