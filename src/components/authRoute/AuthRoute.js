@@ -1,6 +1,7 @@
 import { Component } from 'react'
-import axios from 'axios'
 import {withRouter} from 'react-router-dom'
+import { connect } from 'react-redux'
+import {getUserInfo} from '../../redux/action/RegisterAction'
 
  class AuthRoute extends Component {
     componentDidMount(){
@@ -10,21 +11,8 @@ import {withRouter} from 'react-router-dom'
             // 如果pathname在上述数组中，就不用获取用户信息，否则需要请求用户信息
             return null
         }
-
-
         // 请求获取用户信息
-        axios.get('/user/info').then(res=>{
-            if(res.status===200){
-                // console.log(res.data)
-                if(res.data.code === 0){
-                    // 有登录信息的
-                }else{
-                    // 没有登录信息直接跳转去登录页
-                    // console.log(this.props.history)
-                    this.props.history.push('/login')
-                }
-            }
-        })
+        getUserInfo()
     }   
 
     render(){
@@ -32,5 +20,14 @@ import {withRouter} from 'react-router-dom'
     }
 }
 
+const mapStateToProps = (state) => ({
+    user:null
+})
+
+const mapDispatchToProps = {
+    getUserInfo
+}
+
+
 // 用with
-export default withRouter(AuthRoute)
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(AuthRoute))

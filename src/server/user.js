@@ -5,6 +5,8 @@ const User = model.getModel("user");
 
 // 引入加密的工具
 const utils = require("utility");
+// 过滤条件
+const filter = {'pwd':0,'__v':0}
 
 // 密码+盐值巩固加密
 function ConsolidatePwd(pwd) {
@@ -47,10 +49,12 @@ Router.post("/login", (req, res) => {
   console.log(`登录输入的信息为:账号===>${user},密码=====>${pwd}`);
   
   //{'pwd':0}表示不返回密码
-  User.findOne({ user, pwd: ConsolidatePwd(pwd) },{'pwd':0}, (err, doc) => {
+  User.findOne({ user, pwd: ConsolidatePwd(pwd) },filter, (err, doc) => {
     if (!doc) {
       return res.json({ code: 1, msg: "用户不存在或者密码错误" });
     } else {
+        // 登录成功设置cookie
+      res.cookie('userid',doc.id)
       return res.json({ code: 0, msg: "用户登录成功!", data: doc });
     }
   });
@@ -58,7 +62,20 @@ Router.post("/login", (req, res) => {
 
 // 利用Router挂载
 Router.get("/info", (req, res) => {
-  return res.send({ code: 1 });
+    const {userid} = req.cookies
+    // 如果没有找到userid则返回未登录
+    if(!userid){
+        return res.send({ code: 1 });
+    }else{
+        User.findOne({_id:userid},filter,(err,data)=>{
+            if(err){
+                return res.json({code:1,msg:"服务器请求错误"})
+            }else{
+                return res.json({code:0,data:data})
+            }
+        })
+    }
+  
 });
 
 module.exports = Router;

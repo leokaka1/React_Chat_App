@@ -1,7 +1,8 @@
 import {
   REGISTER_SUCCESS,
   LOGIN_SUCCESS,
-  ERR_MSG
+  ERR_MSG,
+  USER_INFO
 } from "../../const/ActionConst";
 
 // 引入跳转工具类
@@ -20,6 +21,8 @@ const initState = {
 // reducer
 export function UserReducer(state = initState, action) {
   switch(action.type){
+    case USER_INFO:
+        return {...state,...action.payload}
     case REGISTER_SUCCESS:
         return {...state,msg:'',redirectTo:getRedirectPath(action.payload),isAuth:true,...action.payload}
     case LOGIN_SUCCESS:
