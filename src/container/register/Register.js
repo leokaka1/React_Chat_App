@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Logo from "../../components/Logo/Logo";
-import '../login/Login.css'
+import { connect } from "react-redux";
+import { register } from "../../redux/action/RegisterAction";
+import "../login/Login.css";
 // 引入布局组件
 import {
   List,
@@ -8,29 +10,30 @@ import {
   WhiteSpace,
   WingBlank,
   Button,
-  Picker
+  Picker,
 } from "antd-mobile";
 
-export default class Register extends Component {
+class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pickerValue: [],
-      userName:'',
-      pwd:'',
-      confirmPwd:''
+      type: [],
+      user: "",
+      pwd: "",
+      confirmPwd: ""
     };
   }
 
-  registerUser(){
+  registerUser() {
     console.log(
-        `
-        用户名:${this.state.userName},
+      `
+        用户名:${this.state.user},
         密码:${this.state.pwd},
         确认密码:${this.state.confirmPwd},
-        身份:${this.state.pickerValue},
+        身份:${this.state.type},
         `
-    )      
+    );
+    this.props.register(this.state);
   }
 
   render() {
@@ -49,27 +52,53 @@ export default class Register extends Component {
       <div className="loginContent">
         <Logo></Logo>
         <h2>注册用户</h2>
+        {this.props.user.msg ? <p className="err-msg">{this.props.user.msg}</p>:null}
+        <List>
+          <WingBlank>
+            <InputItem onChange={v => this.setState({ user: v })}>
+              用户名:
+            </InputItem>
+            <WhiteSpace />
+            <InputItem
+              onChange={v => this.setState({ pwd: v })}
+              type="password"
+            >
+              密码:
+            </InputItem>
+            <WhiteSpace />
+            <InputItem
+              onChange={v => this.setState({ confirmPwd: v })}
+              type="password"
+            >
+              确认密码:
+            </InputItem>
+            <WhiteSpace />
+            <Picker
+              data={identity}
+              cols={1}
+              value={this.state.type}
+              onChange={v => this.setState({ type: v })}
+            >
+              <List.Item>选择身份:</List.Item>
+            </Picker>
+            <WhiteSpace size="lg" />
 
-        <WingBlank>
-          <InputItem onChange={v=>this.setState({userName:v})}>用户名:</InputItem>
-          <WhiteSpace />
-          <InputItem onChange={v=>this.setState({pwd:v})} type="password">密码:</InputItem>
-          <WhiteSpace />
-          <InputItem onChange={v=>this.setState({confirmPwd:v})} type="password">确认密码:</InputItem>
-          <WhiteSpace />
-          <Picker
-            data={identity}
-            cols={1}
-            value={this.state.pickerValue}
-            onChange={v => this.setState({ pickerValue: v })}
-          >
-            <List.Item>选择身份:</List.Item>
-          </Picker>
-          <WhiteSpace size="lg" />
-
-          <Button type="primary" onClick={()=>this.registerUser()}>注册</Button>
-        </WingBlank>
+            <Button type="primary" onClick={() => this.registerUser()}>
+              注册
+            </Button>
+          </WingBlank>
+        </List>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+const mapDispatchToProps = {
+  register
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

@@ -1,11 +1,17 @@
-import { erroMsg } from "../../const/ActionConst";
+import {ERR_MSG,REGISTER_SUCCESS} from '../../const/ActionConst'
 import Axios from "axios";
 
-export function register({ user, pwd, repeatPwd, type }) {
+// 错误的信息提示
+function erroMsg(msg) {
+    return { type: ERR_MSG, msg: msg };
+}
+
+// 注册Action
+export function register({ user, pwd, confirmPwd, type }) {
   if (!user || !pwd || !type) {
     return erroMsg("用户名密码必须输入");
   }
-  if (pwd !== repeatPwd) {
+  if (pwd !== confirmPwd) {
     return erroMsg("密码和确认密码不相同");
   }
 
@@ -24,7 +30,4 @@ export function register({ user, pwd, repeatPwd, type }) {
   };
 }
 
-// 错误的信息提示
-function erroMsg(msg) {
-  return { type: ERR_MSG, msg: msg };
-}
+
