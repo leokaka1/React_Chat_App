@@ -56,20 +56,7 @@ export function register({ user, pwd, confirmPwd, type }) {
 }
 
 // 获取用户信息
-export function getUserInfo() {
-  return dispatch => {
-    Axios.get("/user/info").then(res => {
-      if (res.status === 200) {
-        // console.log(res.data)
-        if (res.data.code === 0) {
-          // 有登录信息的
-          dispatch({type:USER_INFO,payload:res.data.data})
-        } else {
-          // 没有登录信息直接跳转去登录页
-          // console.log(this.props.history)
-          this.props.history.push("/login");
-        }
-      }
-    });
-  };
+export function getUserInfo(data) {
+
+  return ({type:USER_INFO,payload:data})
 }

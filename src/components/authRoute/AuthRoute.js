@@ -13,13 +13,13 @@ import axios from 'axios'
             // 如果pathname在上述数组中，就不用获取用户信息，否则需要请求用户信息
             return null
         }
+        // 请求获取用户信息
         axios.get("/user/info").then(res => {
             if (res.status === 200) {
               // console.log(res.data)
               if (res.data.code === 0) {
-                // 有登录信息的
-                // dispatch({type:USER_INFO,payload:res.data.data})
-                // getUserInfo()
+                // 有登录信息的,直接将数据存入redux中进行控制
+                this.props.getUserInfo(res.data.data)
               } else {
                 // 没有登录信息直接跳转去登录页
                 // console.log(this.props.history)
@@ -27,9 +27,6 @@ import axios from 'axios'
               }
             }
           });
-        // 请求获取用户信息
-        //  
-        
     }
 
     render(){
