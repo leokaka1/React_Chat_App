@@ -21,7 +21,8 @@
     "react-scripts": "3.2.0",
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "utility": "^1.16.3"
   },
   "proxy": "http://localhost:5000",
   "scripts": {
