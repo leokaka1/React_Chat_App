@@ -26,14 +26,14 @@ class Register extends Component {
   }
 
   registerUser() {
-    console.log(
-      `
-        用户名:${this.state.user},
-        密码:${this.state.pwd},
-        确认密码:${this.state.confirmPwd},
-        身份:${this.state.type},
-        `
-    );
+    // console.log(
+    //   `
+    //     用户名:${this.state.user},
+    //     密码:${this.state.pwd},
+    //     确认密码:${this.state.confirmPwd},
+    //     身份:${this.state.type},
+    //     `
+    // );
     // 解构出数组中的第一个元素，
     this.props.register({...this.state,type:this.state.type[0]});
   }
@@ -58,7 +58,7 @@ class Register extends Component {
           this.props.user.redirectTo ? <Redirect to={this.props.user.redirectTo}/>  : null  
         }
 
-        
+
         <Logo></Logo>
         <h2>注册用户</h2>
         {this.props.user.msg ? <p className="err-msg">{this.props.user.msg}</p>:null}

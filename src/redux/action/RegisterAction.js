@@ -1,28 +1,33 @@
-import {ERR_MSG,REGISTER_SUCCESS,LOGIN_SUCCESS} from '../../const/ActionConst'
+import {
+  ERR_MSG,
+  REGISTER_SUCCESS,
+  LOGIN_SUCCESS
+} from "../../const/ActionConst";
 import Axios from "axios";
 
 // 错误的信息提示
 function erroMsg(msg) {
-    return { type: ERR_MSG, msg: msg };
+  return { type: ERR_MSG, msg: msg };
 }
 
 // 登录
-export function login({user,pwd}){
-  if(!user || !pwd){
-    return erroMsg("用户名密码为空！")
-  }else{
-    return dispatch=>{
-      Axios.post('/user/login',{user,pwd}).then(res=>{
-        // 打印返回的数据
-        console.log(res)
-        if(res.status===200 && res.data.code ===0){
-          dispatch({type:LOGIN_SUCCESS,payload:{user,pwd}})
-        }else{
-          return dispatch(erroMsg(res.data.msg));
-        }
-      })
-    }
-  }
+export function login({ user, pwd }) {
+  if (!user || !pwd) {
+    return erroMsg("用户名密码为空！");
+  } 
+
+  return dispatch => {
+    Axios.post("/user/login", { user, pwd }).then(res => {
+      // 打印返回的数据
+      // console.log('获取登录信息为===>');
+      // console.log(res.data.data);
+      if (res.status === 200 && res.data.code === 0) {
+        dispatch({ type: LOGIN_SUCCESS, payload: {...res.data.data} });
+      } else {
+        return dispatch(erroMsg(res.data.msg));
+      }
+    });
+  };
 }
 
 // 注册Action
@@ -48,5 +53,3 @@ export function register({ user, pwd, confirmPwd, type }) {
     });
   };
 }
-
-
