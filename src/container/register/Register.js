@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Redirect} from 'react-router-dom'
 import Logo from "../../components/Logo/Logo";
 import { connect } from "react-redux";
 import { register } from "../../redux/action/RegisterAction";
@@ -51,6 +52,13 @@ class Register extends Component {
 
     return (
       <div className="loginContent">
+
+        {/* 如果请求中有路径，则跳转去对应的页面路径跳转 */}
+        {
+          this.props.user.redirectTo ? <Redirect to={this.props.user.redirectTo}/>  : null  
+        }
+
+        
         <Logo></Logo>
         <h2>注册用户</h2>
         {this.props.user.msg ? <p className="err-msg">{this.props.user.msg}</p>:null}
