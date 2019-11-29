@@ -2,18 +2,35 @@ import { Component } from 'react'
 import {withRouter} from 'react-router-dom'
 import { connect } from 'react-redux'
 import {getUserInfo} from '../../redux/action/RegisterAction'
+import axios from 'axios'
 
  class AuthRoute extends Component {
     componentDidMount(){
+        console.log(this.props.user)
         const pathArr = ['/login','/register'];
         const pathName = this.props.location.pathName
         if(pathArr.includes(pathName)){
             // 如果pathname在上述数组中，就不用获取用户信息，否则需要请求用户信息
             return null
         }
+        axios.get("/user/info").then(res => {
+            if (res.status === 200) {
+              // console.log(res.data)
+              if (res.data.code === 0) {
+                // 有登录信息的
+                // dispatch({type:USER_INFO,payload:res.data.data})
+                // getUserInfo()
+              } else {
+                // 没有登录信息直接跳转去登录页
+                // console.log(this.props.history)
+                this.props.history.push("/login");
+              }
+            }
+          });
         // 请求获取用户信息
-        getUserInfo()
-    }   
+        //  
+        
+    }
 
     render(){
         return null
@@ -21,7 +38,7 @@ import {getUserInfo} from '../../redux/action/RegisterAction'
 }
 
 const mapStateToProps = (state) => ({
-    user:null
+    user:state.user
 })
 
 const mapDispatchToProps = {

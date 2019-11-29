@@ -32,14 +32,27 @@ Router.post("/register", (req, res) => {
     if (data) {
       return res.json({ code: 1, msg: "用户名重复" });
     }
+
+    const userModel = new User({ user, type, pwd: ConsolidatePwd(pwd) })
+    userModel.save((err,data)=>{
+        if(err){
+            res.json({ code: 1, msg: "后端出错了" }); 
+        }else{
+            const {user,type,_id} = data
+            // 反馈cookie
+            res.cookie('userid',_id)
+            return res.json({code:0,data:{...data}})
+        }
+    })
     // 如果不重复则直接生成一条记录(并且加密了密码)
-    User.create({ user, type, pwd: ConsolidatePwd(pwd) }, (err, data) => {
-      if (err) {
-        res.json({ code: 1, msg: "后端出错了" });
-      } else {
-        res.json({ code: 0, msg: "用户注册成功" });
-      }
-    });
+    // 如果用了create的话，就拿不到id了，所以得用一个save方法拿到对应的id
+    // User.create({ user, type, pwd: ConsolidatePwd(pwd) }, (err, data) => {
+    //   if (err) {
+    //     res.json({ code: 1, msg: "后端出错了" });
+    //   } else {
+    //     res.json({ code: 0, msg: "用户注册成功" });
+    //   }
+    // });
   });
 });
 
