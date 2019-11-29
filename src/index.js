@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import store from "./redux/store/store";
 import Login from "./container/login/Login";
 import Register from "./container/register/Register";

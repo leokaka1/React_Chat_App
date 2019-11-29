@@ -3,7 +3,7 @@ import Logo from '../../components/Logo/Logo'
 import './Login.css'
 
 // 引入布局组件
-import { List, InputItem, WhiteSpace, WingBlank, Button } from 'antd-mobile'
+import {InputItem, WhiteSpace, WingBlank, Button } from 'antd-mobile'
 
 export default class Login extends Component {
 
