@@ -33,7 +33,8 @@ class Register extends Component {
         身份:${this.state.type},
         `
     );
-    this.props.register(this.state);
+    // 解构出数组中的第一个元素，
+    this.props.register({...this.state,type:this.state.type[0]});
   }
 
   render() {
