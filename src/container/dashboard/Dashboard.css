@@ -1,0 +1,15 @@
+.tab-bar{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.nav-bar{
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.conent{
+    padding: 45px 5px; 
+}

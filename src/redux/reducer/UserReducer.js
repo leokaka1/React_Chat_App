@@ -11,7 +11,6 @@ const initState = {
   redirectTo: "",
   msg: "",
   user: "",
-  pwd: "",
   type: ""
 };
 
@@ -20,7 +19,7 @@ export function UserReducer(state = initState, action) {
   switch (action.type) {
     case USER_INFO:
       return { ...state, ...action.payload };
-    case AUTH_SUCCESS:
+    case AUTH_SUCCESS: 
       return {
         ...state,
         msg: "",

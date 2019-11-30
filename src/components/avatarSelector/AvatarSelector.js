@@ -21,7 +21,7 @@ export default class AvatarSelector extends Component {
                      您选择的头像是：
                      {
                         //  老板默认选中了man
-                        this.props.identity==='applicant' ? <img src={require('../../images/boy.png')} alt=''/> : <img src={require('../../images/man.png')} alt=''/> 
+                        this.props.identity==='applicant' && !this.state.avatar ? <img src={require('../../images/boy.png')} alt=''/> : <img src={this.state.avatar} alt=''/> 
                      }
                  </div>
                  <Grid data={avatorList} columnNum={5} onClick={ele=>{

@@ -45,7 +45,7 @@ export function register({ user, pwd, confirmPwd, type }) {
     Axios.post("/user/register", { user, pwd, type }).then(res => {
       if (res.status === 200 && res.data.code === 0) {
         //   如果是注册成功就返回成功信息
-        dispatch({ type: AUTH_SUCCESS, payload: { user, pwd, type } });
+        dispatch({ type: AUTH_SUCCESS, payload: { user,type } });
       } else {
         //   如果是之策失败就返回错误信息
         return dispatch(erroMsg(res.data.msg));
