@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-import { NavBar, TabBar } from "antd-mobile";
-import {connect} from 'react-redux'
+import { NavBar } from "antd-mobile";
+import {connect} from 'react-redux';
+import Tabbar from '../../components/tabBar/Tabbar.js';
 import "./Dashboard.css";
 
 class Dashboard extends Component {
-  constructor(props){
-    super(props)
-    
-  }
       
   render() {
     // console.log(this.props.location)
@@ -52,13 +49,15 @@ class Dashboard extends Component {
           mode="dark"
         >
           {
-            //   find就是在navilist中找到一个对象并且输出
+            //   find就是在navilist中找到一个对象并且输出 
               naviList.find(v=>v.path===pathName).title
           }
         </NavBar>
 
         {/* TabBar */}
-
+        <div className='tab-bar'>
+            <Tabbar data={naviList}></Tabbar>
+        </div>
       </div>
     );
   }
