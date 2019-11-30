@@ -9,6 +9,7 @@ import Login from "./container/login/Login";
 import Register from "./container/register/Register";
 import AuthRoute from "./components/authRoute/AuthRoute";
 import BossInfo from './container/bossInfo/BossInfo'
+import ApplicantsInfo from './container/applicantsInfo/ApplicantsInfo'
 import "./config";
 
 function MyApp() {
@@ -18,8 +19,10 @@ function MyApp() {
         <div>
           <AuthRoute></AuthRoute>
           <Switch>
-            {/* Test */}
+            {/* bossinfo */}
             <Route path="/bossinfo" component={BossInfo}></Route>
+            {/* applicantInfo */}
+            <Route path="/applicantsinfo" component={ApplicantsInfo}></Route>
             {/* 引入登录页 */}
             <Route path="/login" component={Login}></Route>
             {/* 引入注册页 */}

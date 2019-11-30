@@ -5,7 +5,7 @@ export default class AvatarSelector extends Component {
     constructor(props){
         super(props)
         this.state={
-            avatar:''
+            avatar:'',
         }
     }
     render() {
@@ -21,7 +21,7 @@ export default class AvatarSelector extends Component {
                      您选择的头像是：
                      {
                         //  老板默认选中了man
-                        this.state.avatar==='' ? <img src={require('../../images/man.png')} alt=''/> :  <img src={this.state.avatar} alt=''/>
+                        this.props.identity==='applicant' ? <img src={require('../../images/boy.png')} alt=''/> : <img src={require('../../images/man.png')} alt=''/> 
                      }
                  </div>
                  <Grid data={avatorList} columnNum={5} onClick={ele=>{
@@ -32,7 +32,7 @@ export default class AvatarSelector extends Component {
                         avatar:ele.icon 
                      })
                  }}/>
-                 <div style={{textAlign:"center",margin:10}}>职位信息</div>
+                 
             </div>
         )
     }
