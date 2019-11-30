@@ -88,7 +88,6 @@ Router.get("/info", (req, res) => {
             }
         })
     }
-  
 });
 
 module.exports = Router;
