@@ -66,7 +66,8 @@ export function getUpdate(data){
     Axios.post('/user/update',data).then(res=>{
       if (res.status === 200 && res.data.code === 0) {
         //   如果是注册成功就返回成功信息
-        dispatch({ type: AUTH_SUCCESS, payload: res.data});
+        console.log(res.data)
+        dispatch({ type: AUTH_SUCCESS, payload: res.data.data});
       } else {
         //   如果是之策失败就返回错误信息
         return dispatch(erroMsg(res.data.msg));

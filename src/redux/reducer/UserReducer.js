@@ -9,7 +9,6 @@ import { getRedirectPath } from "../../util/util";
 
 const initState = {
   redirectTo: "",
-  isAuth: false,
   msg: "",
   user: "",
   pwd: "",

@@ -106,7 +106,7 @@ Router.post("/update", (req, res) => {
     }
 
     const body = req.body;
-    User.findByIdAndUpdate(userid,body,filter,(err,data)=>{
+    User.findByIdAndUpdate(userid,body,filter,(err,doc)=>{
         /**
          * 举例，因为node对Es6de展开符，支持不完整，所以用了assign去合并对象
          *  var o1 = { a: 1 };
@@ -117,11 +117,11 @@ Router.post("/update", (req, res) => {
             console.log(o1); // { a: 1}
          */
         // 就是将输入的内容和原始的user，type合并返回
-        const updateData = Object.assign({},{
-            user:data.user,
-            type:data.type
+        const data = Object.assign({},{
+            user:doc.user,
+            type:doc.type
         },body)
-        return res.json({code:0,updateData})
+        return res.json({code:0,data})
     })
 });
 

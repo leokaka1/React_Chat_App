@@ -6,7 +6,7 @@ import axios from 'axios'
 
  class AuthRoute extends Component {
     componentDidMount(){
-        console.log(this.props.user)
+        // console.log(this.props.user)
         const pathArr = ['/login','/register'];
         const pathName = this.props.location.pathName
         if(pathArr.includes(pathName)){
