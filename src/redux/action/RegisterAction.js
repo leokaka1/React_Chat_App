@@ -1,7 +1,6 @@
 import {
   ERR_MSG,
-  REGISTER_SUCCESS,
-  LOGIN_SUCCESS,
+  AUTH_SUCCESS,
   USER_INFO
 } from "../../const/ActionConst";
 import Axios from "axios";
@@ -23,7 +22,7 @@ export function login({ user, pwd }) {
       // console.log('获取登录信息为===>');
       // console.log(res.data.data);
       if (res.status === 200 && res.data.code === 0) {
-        dispatch({ type: LOGIN_SUCCESS, payload: { ...res.data.data } });
+        dispatch({ type: AUTH_SUCCESS, payload: { ...res.data.data } });
       } else {
         return dispatch(erroMsg(res.data.msg));
       }
@@ -46,7 +45,7 @@ export function register({ user, pwd, confirmPwd, type }) {
     Axios.post("/user/register", { user, pwd, type }).then(res => {
       if (res.status === 200 && res.data.code === 0) {
         //   如果是注册成功就返回成功信息
-        dispatch({ type: REGISTER_SUCCESS, payload: { user, pwd, type } });
+        dispatch({ type: AUTH_SUCCESS, payload: { user, pwd, type } });
       } else {
         //   如果是之策失败就返回错误信息
         return dispatch(erroMsg(res.data.msg));
@@ -59,4 +58,21 @@ export function register({ user, pwd, confirmPwd, type }) {
 export function getUserInfo(data) {
 
   return ({type:USER_INFO,payload:data})
+}
+
+// 更新请求
+export function getUpdate(data){
+  return dispatch=>{
+    Axios.post('/user/update',data).then(res=>{
+      if (res.status === 200 && res.data.code === 0) {
+        //   如果是注册成功就返回成功信息
+        dispatch({ type: AUTH_SUCCESS, payload: res.data});
+      } else {
+        //   如果是之策失败就返回错误信息
+        return dispatch(erroMsg(res.data.msg));
+      }
+    }).catch(err=>{
+      console.log(err)
+    })
+  }
 }

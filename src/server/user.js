@@ -38,7 +38,7 @@ Router.post("/register", (req, res) => {
         if(err){
             res.json({ code: 1, msg: "后端出错了" }); 
         }else{
-            const {user,type,_id} = data
+            const {_id} = data
             // 反馈cookie
             res.cookie('userid',_id)
             return res.json({code:0,data:{...data}})
@@ -58,7 +58,7 @@ Router.post("/register", (req, res) => {
 
 // 用户登录
 Router.post("/login", (req, res) => {
-    const { user, pwd } = req.body;
+  const { user, pwd } = req.body;
   console.log(`登录输入的信息为:账号===>${user},密码=====>${pwd}`);
   
   //{'pwd':0}表示不返回密码
@@ -73,7 +73,7 @@ Router.post("/login", (req, res) => {
   });
 });
 
-// 利用Router挂载
+// 获取用户列表
 Router.get("/info", (req, res) => {
     const {userid} = req.cookies
     // 如果没有找到userid则返回未登录
@@ -88,6 +88,41 @@ Router.get("/info", (req, res) => {
             }
         })
     }
+});
+
+// 完善信息
+// Router.post('/update',(req,res)=>{
+//     // const body = req.body
+//     return console.log(body),
+// });
+
+// 更新输入信息
+Router.post("/update", (req, res) => {
+    console.log(req.body)
+    // Uer.findByIdAndUpdate()
+    const {userid} = req.cookies
+    if(!userid){
+        return req.json({code:1})
+    }
+
+    const body = req.body;
+    User.findByIdAndUpdate(userid,body,filter,(err,data)=>{
+        /**
+         * 举例，因为node对Es6de展开符，支持不完整，所以用了assign去合并对象
+         *  var o1 = { a: 1 };
+            var o2 = { b: 2 };
+            var o3 = { c: 3 };
+         *  var obj = Object.assign({},o1,o2,o3);//给一个空对象作为target，这样改变的是空对象
+            console.log(obj);// { a: 1, b: 2, c: 3 }
+            console.log(o1); // { a: 1}
+         */
+        // 就是将输入的内容和原始的user，type合并返回
+        const updateData = Object.assign({},{
+            user:data.user,
+            type:data.type
+        },body)
+        return res.json({code:0,updateData})
+    })
 });
 
 module.exports = Router;

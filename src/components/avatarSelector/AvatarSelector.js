@@ -17,9 +17,12 @@ export default class AvatarSelector extends Component {
                             }))
         return (
             <div>
-                 <div style={{margin:15,alignItems:'center',justifyContent:'center',flexDirection:'row'}}>
+                 <div style={{margin:15,alignItems:'center'}}>
                      您选择的头像是：
-                     <img src={this.state.avatar} alt=''/>
+                     {
+                        //  老板默认选中了man
+                        this.state.avatar==='' ? <img src={require('../../images/man.png')} alt=''/> :  <img src={this.state.avatar} alt=''/>
+                     }
                  </div>
                  <Grid data={avatorList} columnNum={5} onClick={ele=>{
                     //  挂载到props上，方便外部拿到头像的名称

@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { NavBar, InputItem, TextareaItem } from "antd-mobile";
+import { NavBar, InputItem, TextareaItem,Button,WingBlank,WhiteSpace,List } from "antd-mobile";
 import AvatarSelector from "../../components/avatarSelector/AvatarSelector";
+import {connect} from 'react-redux'
+import {getUpdate} from '../../redux/action/RegisterAction'
 
-export default class BossInfo extends Component {
+class BossInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,7 +12,7 @@ export default class BossInfo extends Component {
       company: "",
       salary: "",
       desc: "",
-      avatar:""
+      avatar:"man"
     };
   }
 
@@ -21,8 +23,8 @@ export default class BossInfo extends Component {
   }
   render() {
     return (
-      <div>
-        {/* 导航栏 */}
+      <List>
+          {/* 导航栏 */}
         <NavBar mode="dark">Boss页面</NavBar>
         {/* 头像选择 */}
         <AvatarSelector selectAvator={(imagename)=>{
@@ -31,21 +33,37 @@ export default class BossInfo extends Component {
         }}></AvatarSelector>
         {/* 输入框 */}
         <InputItem onChange={v => this.onChange("title", v)}>
-          招聘职位
+          招聘职位:
         </InputItem>
         <InputItem onChange={v => this.onChange("company", v)}>
-          公司名称
+          公司名称:
         </InputItem>
         <InputItem onChange={v => this.onChange("salary", v)}>
-          薪资水平
+          薪资水平:
         </InputItem>
         <TextareaItem
           onChange={v => this.onChange("desc", v)}
           rows={3}
           autoHeight
-          title="职位要求"
+          title="职位要求:"
         />
-      </div>
+        <WhiteSpace size='lg'/>
+        <WingBlank>
+            <Button type='primary' onClick={()=>this.props.getUpdate(this.state)}>确定</Button>
+        </WingBlank>
+        <WhiteSpace size='lg'/>
+      </List>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+    
+})
+
+const mapDispatchToProps = {
+    getUpdate
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(BossInfo)
