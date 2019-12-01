@@ -4,11 +4,10 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import Tabbar from '../../components/tabBar/Tabbar.js';
 import Boss from '../../container/boss/Boss'
+import Applicants from '../../container/applicants/Applicants'
 import "./Dashboard.css";
 
-function Applicants() {
-  return (<div>Applicants</div>)
-}
+
 
 function Message() {
   return (<div>Message</div>)

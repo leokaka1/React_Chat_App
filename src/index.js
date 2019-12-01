@@ -18,9 +18,7 @@ function MyApp() {
     <Provider store={store}>
       <BrowserRouter>
         <div>
-          
           <AuthRoute></AuthRoute>
-
           <Switch>
             {/* bossinfo */}
             <Route path="/bossinfo" component={BossInfo}></Route>
