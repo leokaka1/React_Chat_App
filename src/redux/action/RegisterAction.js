@@ -20,7 +20,7 @@ export function login({ user, pwd }) {
     Axios.post("/user/login", { user, pwd }).then(res => {
       // 打印返回的数据
       // console.log('获取登录信息为===>');
-      // console.log(res.data.data);
+      console.log(res.data.data);
       if (res.status === 200 && res.data.code === 0) {
         dispatch({ type: AUTH_SUCCESS, payload: { ...res.data.data } });
       } else {

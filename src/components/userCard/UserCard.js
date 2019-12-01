@@ -7,6 +7,7 @@ export default class UserCard extends Component {
     userList: PropTypes.array.isRequired
   }
   render() {
+      console.log(this.props.userList)
     return (
       <WingBlank>
         {this.props.userList.map(v => (
@@ -18,9 +19,15 @@ export default class UserCard extends Component {
             />
             <Card.Body>
               {/* 换行 */}
+              {
+                v.type==='boss' ? <div>公司:{v.company}</div> : null
+              }
               {v.desc.split("\n").map(v => (
                 <div key={v}>{v}</div>
               ))}
+              {
+                v.type==='boss' ? <div>薪资:{v.salary}</div> : null
+              }
             </Card.Body>
           </Card>
         ))}
