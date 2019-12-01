@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch,} from "react-router-dom";
 import store from "./redux/store/store";
 import Login from "./container/login/Login";
 import Register from "./container/register/Register";
@@ -18,7 +18,9 @@ function MyApp() {
     <Provider store={store}>
       <BrowserRouter>
         <div>
+          
           <AuthRoute></AuthRoute>
+
           <Switch>
             {/* bossinfo */}
             <Route path="/bossinfo" component={BossInfo}></Route>
@@ -29,8 +31,9 @@ function MyApp() {
             {/* 引入注册页 */}
             <Route path="/register" component={Register}></Route>
             {/* 如果不加Path，上述没有命中就命中最后一个 */}
-            <Route component={Dashboard}/>
-          </Switch>
+            <Route component={Dashboard}/>            
+            {/* <Redirect from='/*' to='/login'></Redirect> */}
+          </Switch>          
         </div>
       </BrowserRouter>
     </Provider>

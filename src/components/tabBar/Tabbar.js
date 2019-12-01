@@ -10,9 +10,10 @@ export class Tabbar extends Component {
   };
   render() {
     const tabbarList = this.props.data.filter(v => !v.hide);
+
     // 获取pathname
     const pathName = this.props.location.pathname
-    // console.log(pathName)
+    // console.log(v.path)
     return (
       <TabBar>
         {tabbarList.map(v => (

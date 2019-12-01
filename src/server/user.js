@@ -17,8 +17,9 @@ function ConsolidatePwd(pwd) {
 
 // 用户列表
 Router.get("/list", (req, res) => {
-  User.find({}, function(err, data) {
-    return res.json(data);
+  const {type} = req.query
+  User.find({type}, function(err, data) {
+    return res.json({code:0,data:data});
   });
 });
 
