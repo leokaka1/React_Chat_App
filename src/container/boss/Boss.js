@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import { WingBlank, Card } from 'antd-mobile'
+import {connect} from 'react-redux'
+import {chatUser} from '../../redux/action/ChatAction'
 
-export default class Boss extends Component {
+class Boss extends Component {
 
     constructor(props) {
         super(props)
@@ -13,22 +14,15 @@ export default class Boss extends Component {
 
     componentDidMount() {
         // 请求对应的列表
-        axios.get('/user/list?type=applicants').then(res => {
-            // console.log(res)
-            if (res.data.code === 0) {
-                this.setState({
-                    data: res.data.data
-                })
-            }
-        })
+        this.props.chatUser()
     }
 
     render() {
-        // console.log(this.state.data)
+        // console.log(this.props)
         return (
             <WingBlank>
                 {
-                    this.state.data.map(v => (
+                    this.props.chat.map(v => (
                         <Card key={v._id}>
                             <Card.Header
                                 title={v.user}
@@ -50,3 +44,14 @@ export default class Boss extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => ({
+    chat:state.chat.user_data
+})
+
+const mapDispatchToProps = {
+    chatUser
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(Boss)

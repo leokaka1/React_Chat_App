@@ -2,10 +2,12 @@ import {createStore,applyMiddleware, combineReducers,compose} from 'redux'
 import {UserReducer} from '../reducer/UserReducer'
 // import logger from 'redux-logger'
 import thunk from 'redux-thunk'
+import {ChatReducer} from '../reducer/ChatReducer'
 
 // 合并reducer
 const rootReducer = combineReducers({
-    user:UserReducer
+    user:UserReducer,
+    chat:ChatReducer
 })
 
 // 引入中间件
