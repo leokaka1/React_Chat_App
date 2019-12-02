@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Result, List,WingBlank,Button ,WhiteSpace, Modal} from "antd-mobile";
 import browserCookies from 'browser-cookies'
+import {logout} from '../../redux/action/RegisterAction'
+import {Redirect} from 'react-router-dom'
 
 export class UserCenter extends Component {
 
@@ -18,7 +20,9 @@ export class UserCenter extends Component {
             // 强制删除了cookies
             browserCookies.erase('userid')
             // 退出并且刷新页面
-            window.location.reload()
+            // window.location.reload()
+            // 清除redux中的信息
+            this.props.logout()
         }},
       ])
   }
@@ -27,7 +31,6 @@ export class UserCenter extends Component {
     const user = this.props.user;
     const Item = List.Item;
     const Brief = Item.Brief;
-    // console.log(this.props.user)
     return this.props.user.user ? (
       <div>
         {/* 顶头的 */}
@@ -60,7 +63,8 @@ export class UserCenter extends Component {
             <Button type="primary" onClick={this.logOut}>退出登录</Button>
         </WingBlank>
       </div>
-    ) : null;
+      
+    ) : <Redirect to ={this.props.user.redirectTo}/> //          {/* 判断跳转路径，如果是登出了则直接跳转到登录页面 */}
   }
 }
 
@@ -68,6 +72,6 @@ const mapStateToProps = state => ({
   user: state.user
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {logout};
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserCenter);

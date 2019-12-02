@@ -1,7 +1,8 @@
 import {
   AUTH_SUCCESS,
   ERR_MSG,
-  USER_INFO
+  USER_INFO,
+  LOGOUT
 } from "../../const/ActionConst";
 
 // 引入跳转工具类
@@ -32,6 +33,8 @@ export function UserReducer(state = initState, action) {
     //     return {...state,msg:'',redirectTo:getRedirectPath(action.payload),isAuth:true,...action.payload}
     case ERR_MSG:
       return { ...state, isAuth: false, msg: action.msg };
+    case LOGOUT:
+      return {...initState,redirectTo:'/login'}
     default:
       return state;
   }

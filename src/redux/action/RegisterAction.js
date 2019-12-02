@@ -1,7 +1,8 @@
 import {
   ERR_MSG,
   AUTH_SUCCESS,
-  USER_INFO
+  USER_INFO,
+  LOGOUT
 } from "../../const/ActionConst";
 import Axios from "axios";
 
@@ -20,7 +21,7 @@ export function login({ user, pwd }) {
     Axios.post("/user/login", { user, pwd }).then(res => {
       // 打印返回的数据
       // console.log('获取登录信息为===>');
-      console.log(res.data.data);
+      // console.log(res.data.data);
       if (res.status === 200 && res.data.code === 0) {
         dispatch({ type: AUTH_SUCCESS, payload: { ...res.data.data } });
       } else {
@@ -28,6 +29,11 @@ export function login({ user, pwd }) {
       }
     });
   };
+}
+
+// 注销
+export function logout(){
+  return {type:LOGOUT}
 }
 
 // 注册Action
@@ -66,7 +72,7 @@ export function getUpdate(data){
     Axios.post('/user/update',data).then(res=>{
       if (res.status === 200 && res.data.code === 0) {
         //   如果是注册成功就返回成功信息
-        console.log(res.data)
+        // console.log(res.data)
         dispatch({ type: AUTH_SUCCESS, payload: res.data.data});
       } else {
         //   如果是之策失败就返回错误信息

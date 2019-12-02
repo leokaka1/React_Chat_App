@@ -8,6 +8,33 @@ import {Redirect} from 'react-router-dom'
 // 引入布局组件
 import { InputItem, WhiteSpace, WingBlank, Button } from "antd-mobile";
 
+
+// practices  高阶组件
+
+// class Hello extends Component{
+//   render(){
+//     return(
+//       <div>这是一个普通的组件</div>
+//     )
+//   }
+// }
+
+// function WrapperHello(Comp){
+//   class WrapperH extends Component{
+//     render(){
+//       return (
+//         <div>
+//           <p>这是一个高阶组件</p>
+//           <Comp {...this.props}></Comp>
+//         </div>
+//       )
+//     }
+//   }
+//   return WrapperH
+// }
+
+// Hello = WrapperHello(Hello)
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +59,7 @@ class Login extends Component {
   render() {
     return (
       <div className="loginContent">
-
+        {/* <Hello></Hello> */}
         {/* 如果请求中有路径，则跳转去对应的页面路径跳转 */}
         {this.props.user.redirectTo ? (
           <Redirect to={this.props.user.redirectTo} />
