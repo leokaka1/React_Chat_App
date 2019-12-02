@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {chatUser} from '../../redux/action/ChatAction'
 import UserCard from '../../components/userCard/UserCard'
 
+
 class Boss extends Component {
 
     componentDidMount() {

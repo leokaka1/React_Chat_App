@@ -1,17 +1,25 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { WingBlank, Card } from 'antd-mobile'
+import {withRouter} from 'react-router-dom'
 
-export default class UserCard extends Component {
+class UserCard extends Component {
   static propTypes = {
     userList: PropTypes.array.isRequired
   }
+
+  // 跳转去聊天页面
+  jumpToChatPage(v){
+    console.log("跳转去聊天页面")
+    this.props.history.push(`/chatPage/${v.user}`)
+  }
+
   render() {
       // console.log(this.props.userList)
     return (
       <WingBlank>
         {this.props.userList.map(v => (
-          <Card key={v._id}>
+          <Card key={v._id} onClick={()=>this.jumpToChatPage(v)}>
             <Card.Header
               title={v.user}
               thumb={require(`../../images/${v.avatar}.png`)}
@@ -35,3 +43,5 @@ export default class UserCard extends Component {
     );
   }
 }
+
+export default withRouter(UserCard)

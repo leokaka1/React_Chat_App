@@ -11,6 +11,7 @@ import AuthRoute from "./components/authRoute/AuthRoute";
 import BossInfo from './container/bossInfo/BossInfo'
 import ApplicantsInfo from './container/applicantsInfo/ApplicantsInfo'
 import Dashboard from './container/dashboard/Dashboard'
+import ChatPage from './components/chatPage/ChatPage'
 import "./config";
 
 function MyApp() {
@@ -28,6 +29,8 @@ function MyApp() {
             <Route path="/login" component={Login}></Route>
             {/* 引入注册页 */}
             <Route path="/register" component={Register}></Route>
+            {/* 引入聊天页面 */}
+            <Route path="/chatPage/:user" component={ChatPage}></Route>
             {/* 如果不加Path，上述没有命中就命中最后一个 */}
             <Route component={Dashboard}/>            
             {/* <Redirect from='/*' to='/login'></Redirect> */}
