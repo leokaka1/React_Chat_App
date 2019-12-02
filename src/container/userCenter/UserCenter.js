@@ -1,8 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Result, List,WingBlank,Button ,WhiteSpace} from "antd-mobile";
+import { Result, List,WingBlank,Button ,WhiteSpace, Modal} from "antd-mobile";
+import browserCookies from 'browser-cookies'
 
 export class UserCenter extends Component {
+
+  constructor(props){
+      super(props)
+      this.logOut = this.logOut.bind(this)
+  }
+  
+  logOut(){
+    const alert = Modal.alert
+    alert('注销', '确定退出吗???', [
+        { text: '取消', onPress: () => console.log('cancel') },
+        { text: '确定', onPress: () => {
+            // 强制删除了cookies
+            browserCookies.erase('userid')
+            // 退出并且刷新页面
+            window.location.reload()
+        }},
+      ])
+  }
+
   render() {
     const user = this.props.user;
     const Item = List.Item;
@@ -37,7 +57,7 @@ export class UserCenter extends Component {
         <WhiteSpace size='lg'></WhiteSpace>
 
         <WingBlank>
-            <Button type="primary">退出登录</Button>
+            <Button type="primary" onClick={this.logOut}>退出登录</Button>
         </WingBlank>
       </div>
     ) : null;
