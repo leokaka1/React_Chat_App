@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import Tabbar from '../../components/tabBar/Tabbar.js';
 import Boss from '../../container/boss/Boss'
 import Applicants from '../../container/applicants/Applicants'
+import UserCenter from '../../container/userCenter/UserCenter'
 import "./Dashboard.css";
 
 
@@ -13,9 +14,6 @@ function Message() {
   return (<div>Message</div>)
 }
 
-function My() {
-  return (<div>My</div>)
-}
 
 class Dashboard extends Component {
 
@@ -52,7 +50,7 @@ class Dashboard extends Component {
         text: '我的',
         icon: 'user',
         title: "我的",
-        component: My
+        component: UserCenter
       },
     ]
     return (

@@ -7,7 +7,7 @@ export default class UserCard extends Component {
     userList: PropTypes.array.isRequired
   }
   render() {
-      console.log(this.props.userList)
+      // console.log(this.props.userList)
     return (
       <WingBlank>
         {this.props.userList.map(v => (
