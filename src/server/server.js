@@ -23,7 +23,13 @@ const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 // 模拟socket请求
 io.on('connect',(socket)=>{
-  console.log('user login')
+  // console.log('user login')
+  // 接收当前socket连接获取到的数据
+  socket.on('sendmsg',(data)=>{
+    // console.log(data)
+    // 发送全局广播
+    io.emit('sendMsg',data)
+  })
 })
 
 

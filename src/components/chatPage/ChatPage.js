@@ -1,22 +1,67 @@
-import React, { Component } from 'react'
-import {withRouter} from 'react-router-dom'
-import io from 'socket.io-client'
+import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import io from "socket.io-client";
+import { List, InputItem } from "antd-mobile";
+import "./ChatPage.css";
+const socket = io.connect("localhost:5000");
+
 class ChatPage extends Component {
-    componentDidMount(){
-        const socket = io.connect('localhost:5000')
-    }
-    render() {
-        console.log(this.props.match.params)
-        return (
-            <div>
-                这是组件
-                {
-                    this.props.match.params.user
-                }
-            </div>
-        )
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: "",
+      msg: []
+    };
+  }
+
+  componentDidMount() {
+    // 监听全局广播
+    socket.on("sendMsg", data => {
+      //   console.log(data);
+      this.setState({
+          msg:[...this.state.msg,data.text]
+      });
+    });
+  }
+
+  submit() {
+    // console.log(this.state.text)
+    // 发送socket
+    socket.emit("sendmsg", { text: this.state.text });
+    // 清空输入信息
+    this.setState({
+      text: " "
+    });
+  }
+
+  render() {
+    return (
+      <div>
+
+          {/* 内容 */}
+          {
+              this.state.msg.map(v=>(
+                //   接收内容
+                <p key={Math.random()}>{v}</p>
+              ))
+          }
+
+          {/* 输入组件 */}
+        <div className="chatfoter">
+          <List>
+            <InputItem
+              placeholder="请输入"
+              value={this.state.text}
+              onChange={v => {
+                this.setState({ text: v });
+              }}
+              extra={<span onClick={() => this.submit()}>发送</span>}
+            />
+          </List>
+        </div>
+      </div>
+    );
+  }
 }
 
-
-export default withRouter(ChatPage)
+export default withRouter(ChatPage);
