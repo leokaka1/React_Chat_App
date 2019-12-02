@@ -22,6 +22,21 @@ const model = {
     company: { type: String },
     // 薪资
     salary: { type: String }
+  },
+  //聊天model
+  chat:{
+    // 聊天ID
+    chatId:{type:String,require:true},
+    // 内容来源
+    from:{type:String,require:true},
+    // 发送给谁
+    to:{type:String,require:true},
+    // 内容
+    content:{type:String,require:true,default:''},
+    // 创建时间
+    createTime:{type:Number,default:new Date().getTime()},
+    // 是否未读
+    read:{type:Boolean,default:false}
   }
 };
 
