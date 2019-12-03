@@ -11,7 +11,7 @@ class UserCard extends Component {
   // 跳转去聊天页面
   jumpToChatPage(v){
     console.log("跳转去聊天页面")
-    this.props.history.push(`/chatPage/${v.user}`)
+    this.props.history.push(`/chatPage/${v._id}`)
   }
 
   render() {

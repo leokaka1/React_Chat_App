@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import io from "socket.io-client";
 import { List, InputItem } from "antd-mobile";
 import "./ChatPage.css";
 import {connect} from 'react-redux'
-import {getMsgList} from '../../redux/action/ChatAction'
-const socket = io.connect("localhost:5000");
+import {getMsgList,sendMsg,recevMsg} from '../../redux/action/ChatAction'
 
+// import io from "socket.io-client";
+// const socket = io.connect("localhost:5000");
 
 class ChatPage extends Component {
   constructor(props) {
@@ -26,12 +26,20 @@ class ChatPage extends Component {
     //   });
     // });
     this.props.getMsgList()
+    this.props.recevMsg()
   }
 
   submit() {
-    // console.log(this.state.text)
-    // 发送socket
-    socket.emit("sendmsg", { text: this.state.text });
+    // // 发送socket
+    // socket.emit("sendmsg", { text: this.state.text });
+    // from 谁发起
+    const from = this.props.user._id
+    // to 发送给谁
+    const to = this.props.match.params.user
+    // 发送的消息
+    const msg = this.state.text
+    // 发送消息
+    this.props.sendMsg({from,to,msg})
     // 清空输入信息
     this.setState({
       text: " "
@@ -69,11 +77,14 @@ class ChatPage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    user:state.chat
+    user:state.user,
+    chat:state.chat
 })
 
 const mapDispatchToProps = {
-    getMsgList
+    getMsgList,
+    sendMsg,
+    recevMsg
 }
 
 

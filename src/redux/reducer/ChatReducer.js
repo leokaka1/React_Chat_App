@@ -10,14 +10,15 @@ export function ChatReducer(state = initialState,action){
     const data = action.payload
     switch (action.type) {
         case CHAT_USER:
-            return {user_data:data}
+            return {...state,user_data:data}
         case MSG_RECV:
-            return {chatMsg:action.payload,unread:action.payload.filter(v=>!v.read).length}
+            return {...state,chatMsg:[...state.chatMsg,data.content]}
         case MSG_READ:
-            return {user_data:data}
+            return {...state,user_data:data}
         case MSG_LIST:
-            return {user_data:data}
+            // 获取已读信息
+            return {chatMsg:action.payload,unread:action.payload.filter(v=>!v.read).length}
         default:
-            return state
+            return {...state}
     }
 }
