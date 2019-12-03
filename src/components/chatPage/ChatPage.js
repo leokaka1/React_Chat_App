@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { List, InputItem } from "antd-mobile";
+import { List, InputItem,NavBar } from "antd-mobile";
 import "./ChatPage.css";
 import {connect} from 'react-redux'
 import {getMsgList,sendMsg,recevMsg} from '../../redux/action/ChatAction'
@@ -41,13 +41,31 @@ class ChatPage extends Component {
   }
 
   render() {
-    console.log("获取信息",this.props.chat.chatMsg)
+    //   对方的Id
+    const user = this.props.match.params.user
     return (
-      <div>
+      <div id='chat-page'>
+        {/* 导航 */}
+        <NavBar mode="dark">
+            {this.props.match.params.user}
+        </NavBar>
         {/* 内容 */}
         {
             this.props.chat.chatMsg.map(v=>{
-                return <p key={Math.random()}>{v.content}</p>
+                return v.from === user ? (
+                    // <p key={v._id}>对方发送的数据:{v.content}</p>
+                    <List key={v._id}>
+                        <List.Item>
+                            {v.content}
+                        </List.Item>
+                    </List>
+                ):(
+                    <List key={v._id}>
+                        <List.Item extra={'avatar'} className='chat_own'>
+                            {v.content}
+                        </List.Item>
+                    </List>
+                )
             })
         }
         {/* 输入组件 */}

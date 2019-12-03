@@ -4,3 +4,12 @@
     width: 100%;
     background-color: blue;
 }
+
+#chat-page .chat_own .am-list-content {
+    padding-right: 15px;
+    text-align: right;
+}
+
+#chat-page .chat_own .am-list-extra{
+    flex-basis: auto;
+}
