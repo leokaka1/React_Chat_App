@@ -1,4 +1,4 @@
-import {CHAT_USER} from '../../const/ActionConst'
+import {CHAT_USER,MSG_RECV,MSG_READ,MSG_LIST} from '../../const/ActionConst'
 import axios from 'axios'
 
 export function chatUser(type){
@@ -10,6 +10,15 @@ export function chatUser(type){
                 // console.log(res.data.data)
                 dispatch({type:CHAT_USER,payload:res.data.data})
             }
+        })
+    }
+}
+
+
+export function getMsgList(){
+    return dispatch=>{
+        axios.get('/user/getMsgList').then(res=>{
+            dispatch({type:MSG_LIST,payload:res.data.data})
         })
     }
 }

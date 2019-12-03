@@ -2,6 +2,7 @@ const express = require("express");
 const Router = express.Router();
 const model = require("./model");
 const User = model.getModel("user");
+const Chat = model.getModel("chat")
 
 // 引入加密的工具
 const utils = require("utility");
@@ -125,5 +126,16 @@ Router.post("/update", (req, res) => {
         return res.json({code:0,data})
     })
 });
+
+// 获取用户聊天列表
+Router.get('/getMsgList',(req,res)=>{
+    // const body = req.body
+    const {userid} = req.cookies;
+    Chat.find({},(err,doc)=>{
+      if(!err){
+        return res.json({code:0,msgs:doc})
+      }
+    })
+  });
 
 module.exports = Router;

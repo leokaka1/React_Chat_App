@@ -59,7 +59,6 @@ class Login extends Component {
   render() {
     return (
       <div className="loginContent">
-        {/* <Hello></Hello> */}
         {/* 如果请求中有路径，则跳转去对应的页面路径跳转 */}
         {this.props.user.redirectTo ? (
           <Redirect to={this.props.user.redirectTo} />

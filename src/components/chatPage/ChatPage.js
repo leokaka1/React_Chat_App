@@ -3,7 +3,10 @@ import { withRouter } from "react-router-dom";
 import io from "socket.io-client";
 import { List, InputItem } from "antd-mobile";
 import "./ChatPage.css";
+import {connect} from 'react-redux'
+import {getMsgList} from '../../redux/action/ChatAction'
 const socket = io.connect("localhost:5000");
+
 
 class ChatPage extends Component {
   constructor(props) {
@@ -16,12 +19,13 @@ class ChatPage extends Component {
 
   componentDidMount() {
     // 监听全局广播
-    socket.on("sendMsg", data => {
-      //   console.log(data);
-      this.setState({
-          msg:[...this.state.msg,data.text]
-      });
-    });
+    // socket.on("sendMsg", data => {
+    //   //   console.log(data);
+    //   this.setState({
+    //       msg:[...this.state.msg,data.text]
+    //   });
+    // });
+    this.props.getMsgList()
   }
 
   submit() {
@@ -64,4 +68,13 @@ class ChatPage extends Component {
   }
 }
 
-export default withRouter(ChatPage);
+const mapStateToProps = (state) => ({
+    user:state.chat
+})
+
+const mapDispatchToProps = {
+    getMsgList
+}
+
+
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(ChatPage));

@@ -23,7 +23,7 @@ const model = {
     // 薪资
     salary: { type: String }
   },
-  //聊天model
+  // //聊天model
   chat:{
     // 聊天ID
     chatId:{type:String,require:true},
