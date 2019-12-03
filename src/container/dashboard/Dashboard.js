@@ -7,7 +7,7 @@ import Boss from '../../container/boss/Boss'
 import Applicants from '../../container/applicants/Applicants'
 import UserCenter from '../../container/userCenter/UserCenter'
 import "./Dashboard.css";
-
+import {getMsgList,recevMsg} from '../../redux/action/ChatAction'
 
 
 function Message() {
@@ -16,6 +16,12 @@ function Message() {
 
 
 class Dashboard extends Component {
+
+  // 这里请求消息列表是为了获取未读信息
+  componentDidMount(){
+    this.props.getMsgList()
+    this.props.recevMsg()
+  }
 
   render() {
     // console.log(this.props.location)
@@ -93,7 +99,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-
+  getMsgList,recevMsg
 }
 
 

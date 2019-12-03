@@ -9,7 +9,6 @@ export function chatUser(type){
         axios.get(`/user/list?type=${type}`).then(res => {
             // console.log(res)
             if (res.data.code === 0) {
-                // console.log(res.data.data)
                 dispatch({type:CHAT_USER,payload:res.data.data})
             }
         })

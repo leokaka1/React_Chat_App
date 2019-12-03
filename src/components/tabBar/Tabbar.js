@@ -18,6 +18,8 @@ export class Tabbar extends Component {
       <TabBar>
         {tabbarList.map(v => (
             <TabBar.Item
+            // 判断路径如果是message，就显示未读消息
+                badge={v.path==='/message'?this.props.chat.unread:0}
                 key={v.path}
                 title={v.text}
                 icon={{uri:require(`../../images/navi/${v.icon}.png`)}}
@@ -35,7 +37,9 @@ export class Tabbar extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  chat:state.chat
+});
 
 const mapDispatchToProps = {};
 

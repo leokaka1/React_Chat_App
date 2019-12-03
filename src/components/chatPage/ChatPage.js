@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { List, InputItem,NavBar } from "antd-mobile";
 import "./ChatPage.css";
 import {connect} from 'react-redux'
-import {getMsgList,sendMsg,recevMsg} from '../../redux/action/ChatAction'
+import {getMsgList,recevMsg,sendMsg} from '../../redux/action/ChatAction'
 
 // import io from "socket.io-client";
 // const socket = io.connect("localhost:5000");
@@ -18,11 +18,7 @@ class ChatPage extends Component {
   }
 
   componentDidMount() { 
-    this.props.getMsgList()
-    this.props.recevMsg()
-    // socket.on('recvMsg',(d)=>{
-    //     console.log('resvMsg',d._doc)
-    // })
+    
   }
 
   submit() {

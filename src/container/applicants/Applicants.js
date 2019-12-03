@@ -9,15 +9,14 @@ export class Applicants extends Component {
         this.props.chatUser('boss')
     }
     render() {
-        // console.log(this.props)
         return (
-            <UserCard userList={this.props.chat}></UserCard>
+            <UserCard userList={this.props.chat.user_data}></UserCard>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    chat:state.chat.user_data
+    chat:state.chat
 })
 
 const mapDispatchToProps = {

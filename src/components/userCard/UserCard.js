@@ -15,7 +15,7 @@ class UserCard extends Component {
   }
 
   render() {
-      // console.log(this.props.userList)
+    // console.log("打印UserList",this.props.userList)
     return (
       <WingBlank>
         {this.props.userList.map(v => (
