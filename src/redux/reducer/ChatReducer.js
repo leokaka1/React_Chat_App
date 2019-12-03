@@ -12,7 +12,7 @@ export function ChatReducer(state = initialState,action){
         case CHAT_USER:
             return {...state,user_data:data}
         case MSG_RECV:
-            return {...state,chatMsg:[...state.chatMsg,data.content]}
+            return {...state,chatMsg:[...state.chatMsg,data],unread:state.unread+1}
         case MSG_READ:
             return {...state,user_data:data}
         case MSG_LIST:

@@ -17,21 +17,15 @@ class ChatPage extends Component {
     };
   }
 
-  componentDidMount() {
-    // 监听全局广播
-    // socket.on("sendMsg", data => {
-    //   //   console.log(data);
-    //   this.setState({
-    //       msg:[...this.state.msg,data.text]
-    //   });
-    // });
+  componentDidMount() { 
     this.props.getMsgList()
     this.props.recevMsg()
+    // socket.on('recvMsg',(d)=>{
+    //     console.log('resvMsg',d._doc)
+    // })
   }
 
   submit() {
-    // // 发送socket
-    // socket.emit("sendmsg", { text: this.state.text });
     // from 谁发起
     const from = this.props.user._id
     // to 发送给谁
@@ -42,23 +36,21 @@ class ChatPage extends Component {
     this.props.sendMsg({from,to,msg})
     // 清空输入信息
     this.setState({
-      text: " "
+      text: ""
     });
   }
 
   render() {
+    console.log("获取信息",this.props.chat.chatMsg)
     return (
       <div>
-
-          {/* 内容 */}
-          {
-              this.state.msg.map(v=>(
-                //   接收内容
-                <p key={Math.random()}>{v}</p>
-              ))
-          }
-
-          {/* 输入组件 */}
+        {/* 内容 */}
+        {
+            this.props.chat.chatMsg.map(v=>{
+                return <p key={Math.random()}>{v.content}</p>
+            })
+        }
+        {/* 输入组件 */}
         <div className="chatfoter">
           <List>
             <InputItem

@@ -20,7 +20,7 @@ export function chatUser(type){
 export function getMsgList(){
     return dispatch=>{
         axios.get('/user/getMsgList').then(res=>{
-            // console.log("获取列表打印",res.data.msgs)
+            console.log("获取列表打印",res.data.msgs)
             dispatch({type:MSG_LIST,payload:res.data.msgs})
         })
     }
@@ -28,7 +28,6 @@ export function getMsgList(){
 
 // socket发送实时消息
 export function sendMsg({from,to,msg}){
-    console.log(msg)
     return dispatch=>{
         socket.emit("sendmsg", {from,to,msg});
     }
@@ -38,7 +37,7 @@ export function sendMsg({from,to,msg}){
 export function recevMsg(){
     return dispatch =>{
         socket.on('recvMsg',(d)=>{
-            console.log('resvMsg',d._doc)
+            // console.log('resvMsg',d._doc)
             dispatch({type:MSG_RECV,payload:d._doc})
         })
     }

@@ -27,9 +27,8 @@ io.on('connect',(socket)=>{
   // console.log('user login')
   // 接收当前socket连接获取到的数据
   socket.on('sendmsg',(data)=>{
-    console.log(data)
+    // console.log(data)
     // 发送全局广播
-    // 
     const {from ,to,msg} = data
     // 编辑一个唯一的chatid
     const chatid = [from,to].sort().join('_')
