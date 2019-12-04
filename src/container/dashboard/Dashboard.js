@@ -19,8 +19,11 @@ class Dashboard extends Component {
 
   // 这里请求消息列表是为了获取未读信息
   componentDidMount(){
-    this.props.getMsgList()
-    this.props.recevMsg()
+    // 避免重复切换
+    if(!this.props.chat.chatMsg.length){
+      this.props.getMsgList()
+      this.props.recevMsg()
+    }
   }
 
   render() {
@@ -95,7 +98,8 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  user: state.user
+  user: state.user,
+  chat:state.chat
 })
 
 const mapDispatchToProps = {

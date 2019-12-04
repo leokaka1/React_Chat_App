@@ -31,8 +31,8 @@ io.on('connect',(socket)=>{
     // 发送全局广播
     const {from ,to,msg} = data
     // 编辑一个唯一的chatid
-    const chatid = [from,to].sort().join('_')
-    Chat.create({chatid,from,to,content:msg},(err,doc)=>{
+    const chatId = [from,to].sort().join('_')
+    Chat.create({chatId,from,to,content:msg},(err,doc)=>{
       io.emit('recvMsg',Object.assign({},doc))
     })
   })

@@ -13,3 +13,11 @@
 #chat-page .chat_own .am-list-extra{
     flex-basis: auto;
 }
+
+#chat-page .am-grid-icon{
+    display: none;
+}
+
+#chat-page .am-grid-text{
+    margin-top: 0;
+}
