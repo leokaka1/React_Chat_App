@@ -34,7 +34,7 @@ const model = {
     // 内容
     content:{type:String,require:true,default:''},
     // 创建时间
-    createTime:{type:Number,default:new Date().getTime()},
+    createTime:{type:Number,require:true},
     // 是否未读
     read:{type:Boolean,default:false}
   }

@@ -19,7 +19,7 @@ export function ChatReducer(state = initialState,action){
             return {...state,user_data:data}
         case MSG_LIST:
             // 获取已读信息
-            return {...state,chatMsg:action.payload.data.msgs,users:action.payload.data.users,unread:action.payload.data.msgs.filter(v=>!v.read && v.to === action.payload.userId).length}
+            return {...state,chatMsg:action.payload.data.msgs,users:action.payload.data.users,unread:action.payload.data.msgs.filter(v=>!v.read && v.to === action.payload.userID).length}
         default:
             return {...state}
     }

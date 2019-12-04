@@ -32,7 +32,9 @@ io.on('connect',(socket)=>{
     const {from ,to,msg} = data
     // 编辑一个唯一的chatid
     const chatId = [from,to].sort().join('_')
-    Chat.create({chatId,from,to,content:msg},(err,doc)=>{
+    const createTime = new Date().getTime()
+    Chat.create({chatId,from,to,content:msg,createTime},(err,doc)=>{
+      // console.log(doc)
       io.emit('recvMsg',Object.assign({},doc))
     })
   })
