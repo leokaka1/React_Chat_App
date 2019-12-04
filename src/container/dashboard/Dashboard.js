@@ -8,11 +8,7 @@ import Applicants from '../../container/applicants/Applicants'
 import UserCenter from '../../container/userCenter/UserCenter'
 import "./Dashboard.css";
 import {getMsgList,recevMsg} from '../../redux/action/ChatAction'
-
-
-function Message() {
-  return (<div>Message</div>)
-}
+import Message from '../../container/message/Message'
 
 
 class Dashboard extends Component {
