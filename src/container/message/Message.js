@@ -10,7 +10,7 @@ export class Message extends Component {
 
   // 跳转去聊天页面
   pushIntoChatPage(v){
-    console.log(v)
+    // console.log(v)
     this.props.history.push(`/chatPage/${v}`)
   }
   

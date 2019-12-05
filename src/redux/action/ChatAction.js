@@ -54,7 +54,7 @@ export function readMsg(from){
         axios.post('/user/readmsg',{from}).then((res)=>{
             const user_id = getState().user._id
             if(res.status===200 && res.data.code===0){
-                console.log(res)
+                // console.log(res)
                 dispatch({type:MSG_READ,payload:{from,user_id,num:res.data.num}})
             }
         })
