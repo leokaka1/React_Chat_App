@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { List, InputItem, NavBar, Icon, Grid } from "antd-mobile";
 import "./ChatPage.css";
 import { connect } from "react-redux";
-import { getMsgList, recevMsg, sendMsg } from "../../redux/action/ChatAction";
+import { getMsgList, recevMsg, sendMsg,readMsg } from "../../redux/action/ChatAction";
 import { getChatId } from "../../util/util";
 // import io from "socket.io-client";
 // const socket = io.connect("localhost:5000");
@@ -22,6 +22,13 @@ class ChatPage extends Component {
       this.props.getMsgList();
       this.props.recevMsg();
     }
+  }
+
+//   在页面销毁的时候解决未读问题
+  componentWillUnmount(){
+    // 获取发送的人
+    const to = this.props.match.params.user
+    this.props.readMsg(to)
   }
 
   // 修复跑马灯
@@ -152,7 +159,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getMsgList,
   sendMsg,
-  recevMsg
+  recevMsg,
+  readMsg
 };
 
 export default withRouter(

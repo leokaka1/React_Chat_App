@@ -156,4 +156,20 @@ Router.get("/getMsgList", (req, res) => {
   });
 });
 
+// 已读信息
+Router.post('/readmsg',(req,res)=>{
+  const user_id = req.cookies.userid
+  const {from} = req.body
+  // console.log(user_id,from)
+
+  Chat.update({from,to:user_id},{$set:{read:true}},{'multi':true},(err,doc)=>{
+    // console.log(doc)
+    if(!err){
+      return res.json({code:0,num:doc.nModified })
+    }
+
+    return res.json({code:1,msg:"修改失败"})
+  })
+})
+
 module.exports = Router;

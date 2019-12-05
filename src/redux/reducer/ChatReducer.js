@@ -16,7 +16,11 @@ export function ChatReducer(state = initialState,action){
             // 如果是本人发送则未读信息不+1，如果是对方发送则id+1
             return {...state,chatMsg:[...state.chatMsg,action.payload.data],unread:action.payload.data.to===action.payload.userID?state.unread+1:0}
         case MSG_READ:
-            return {...state,user_data:data}
+            // 取出当前的聊天人
+            const {from} = action.payload
+            return {...state,chatMsg:state.chatMsg.map(v=>({
+                 ...v,read:from===v.from?true:v.read
+            })), unread:state.unread-action.payload.num}
         case MSG_LIST:
             // 获取已读信息
             return {...state,chatMsg:action.payload.data.msgs,users:action.payload.data.users,unread:action.payload.data.msgs.filter(v=>!v.read && v.to === action.payload.userID).length}

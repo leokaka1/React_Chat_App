@@ -7,6 +7,13 @@ export class Message extends Component {
   getLastContent(arr) {
     return arr[arr.length - 1];
   }
+
+  // 跳转去聊天页面
+  pushIntoChatPage(v){
+    console.log(v)
+    this.props.history.push(`/chatPage/${v}`)
+  }
+  
   render() {
     const msgGroup = {};
     this.props.chat.chatMsg.map(v => {
@@ -43,6 +50,7 @@ export class Message extends Component {
               <List.Item
                 thumb={require(`../../images/${this.props.chat.users[showUserId].avatar}.png`)}
                 extra = {<Badge text={unread}/>}
+                onClick={()=>this.pushIntoChatPage(showUserId)}
               >
                 {lastItem.content}
                 <List.Item.Brief>
